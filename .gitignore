@@ -1,0 +1,6 @@
+# Participant responses are research data and must never be published with the site.
+study-data/
+
+# Generated files and local Python cache.
+_site/
+__pycache__/

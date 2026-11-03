@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>三维场景编辑 · 用户研究</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="data.js"></script><script defer src="app.js"></script><script defer src="sync.js"></script>
+</head>
+<body>
+  <header class="site-header"><a href="./" class="brand">VIEW / STUDY <span>三维场景编辑评价</span></a><span class="badge">用户研究</span></header>
+  <main>
+    <section id="welcome" class="welcome">
+      <p class="eyebrow">MULTI-VIEW EDITING · USER STUDY</p>
+      <h1>用你的观察，<br>评价每一种编辑。</h1>
+      <p class="intro">观察同一场景的多视角结果，从指令遵循、跨视角一致性和视觉质量三个维度，选出你认为最好的一组。</p>
+      <div class="facts"><span><b>10</b> 个编辑样例</span><span><b>3</b> 个评价维度</span><span><b>5</b> 组候选结果</span></div>
+      <form id="login-form" class="panel login"><label for="username">注册参与用户名</label><p class="muted">输入一个便于研究者识别的名字即可，无需密码。进度自动保存到研究者电脑，并在当前浏览器缓存。</p><input id="username" name="username" maxlength="60" required autocomplete="nickname" placeholder="请输入用户名"><button class="primary" type="submit">开始评价 <span>→</span></button></form>
+      <div id="resume-box" class="panel" hidden><p id="resume-text"></p><button id="resume" class="primary">继续上次评价 →</button><p class="muted">使用其他用户名开始，会替换此浏览器中的当前进度。</p></div>
+      <p class="muted">评价结果自动保存。中断后，请使用同一浏览器打开本页面继续。</p>
+    </section>
+    <section id="study" hidden>
+      <article class="panel instructions">
+        <p class="eyebrow">BEFORE YOU BEGIN</p><h1>用户研究说明（User Study Instructions）</h1>
+        <p>感谢您参与本次用户研究！</p>
+        <p>在本问卷中，您将看到一个三维场景的 <strong>4 张原始视角图像</strong>、一条文本编辑指令，以及 <strong>5 组不同方法生成的编辑结果</strong>。每组结果包含与原始图像对应的 4 张编辑后图像。</p>
+        <p>请仔细观察原始图像、编辑指令及各组编辑结果，并分别从以下三个维度选择您认为表现最好的一组：</p>
+        <div class="definitions"><div><h3>1. 指令遵循（Instruction Following）</h3><p>编辑结果是否准确、充分地实现了指定的编辑目标？</p></div><div><h3>2. 跨视角一致性（Multi-view Consistency）</h3><p>同一场景的编辑效果是否在不同视角下保持一致，是否存在明显的外观差异或编辑不连贯现象？</p></div><div><h3>3. 视觉质量（Visual Quality）</h3><p>编辑结果是否自然、清晰，是否存在明显的模糊、伪影或结构失真？</p></div></div>
+        <strong>注意事项：</strong><ul><li>请将每组中的 4 张图像作为一个整体进行评价。</li><li>对于每个评价维度，请从 A、B、C、D、E 五个选项中选择表现最好的一组。</li><li>三个维度相互独立，您可以在不同维度中选择相同或不同的选项。</li></ul>
+        <p>本问卷没有标准答案，请根据您的实际观察和直观感受独立作出判断。感谢您的参与！</p>
+      </article>
+      <div class="study-meta"><span id="participant"></span><span id="progress-text"></span><span id="save-status" role="status"></span></div>
+      <progress id="progress" max="10" value="0" aria-label="已完成题目"></progress>
+      <section class="prompt-box"><p class="eyebrow">EDITING PROMPT / 编辑指令</p><h2 id="prompt"></h2><p class="muted">点击图片放大 · 左右切换对比 · 每张图片中的四个视角作为一组评价</p></section>
+      <div id="gallery" class="gallery"></div>
+      <section class="panel rating"><h2>哪一组表现最好？</h2><p class="muted">请为每个维度选择一组结果，三个维度可选择不同选项。</p><div id="ratings"></div></section>
+      <p id="question-error" class="error" role="alert"></p>
+      <nav class="navigation"><button id="previous">← 上一题</button><span id="answered"></span><button id="next" class="primary">下一题 →</button></nav>
+    </section>
+    <section id="complete" class="welcome" hidden><p class="eyebrow">EVALUATION COMPLETE</p><h1>感谢你的认真观察。</h1><p class="intro">10 个样例已全部评价完成。请确认下方显示“全部评价已提交并保存到研究者电脑”，再关闭页面。</p><div class="panel"><h2 id="completion-name"></h2><p>评价结果自动提交给研究者，无需下载或发送文件。</p></div><button id="review">← 返回检查答案</button></section>
+    <section id="persistence" class="panel" hidden><h3>保存与中断续评</h3><p id="sync-status" role="status" aria-live="polite"></p><button id="retry-save">立即重试保存</button> <button id="reload-progress">读取服务器进度</button><p class="muted">同一浏览器可点击“继续上次评价”。请勿清除浏览器数据。离开前请确认进度已保存到研究者电脑。</p></section>
+    <p id="storage-warning" class="error" role="alert" hidden>浏览器无法保存本地进度。请勿刷新或关闭此页面，确认结果已保存到研究者电脑后再离开。</p>
+  </main>
+  <footer>VIEW / STUDY <span>观察 · 比较 · 独立判断</span></footer>
+  <dialog id="viewer" aria-label="图片放大对比"><div class="viewer-toolbar"><strong id="viewer-label"></strong><span id="viewer-prompt"></span><button id="zoom" aria-label="切换图片缩放">放大 2×</button><button id="close-viewer" aria-label="关闭大图">关闭 ✕</button></div><div class="viewer-stage" id="viewer-stage"><img id="viewer-image" alt=""></div><div class="viewer-nav"><button id="image-prev" aria-label="上一张图片">← 上一张</button><span>方向键切换 · 放大后拖动 · Esc 关闭</span><button id="image-next" aria-label="下一张图片">下一张 →</button></div></dialog>
+</body>
+</html>

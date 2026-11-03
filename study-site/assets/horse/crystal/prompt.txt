@@ -1,0 +1,1 @@
+Change the horse sculpture's material to crystal.
