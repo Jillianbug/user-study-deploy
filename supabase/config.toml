@@ -1,2 +1,2 @@
 [functions.study-api]
-verify_jwt = true
+verify_jwt = false

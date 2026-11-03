@@ -20,7 +20,7 @@
    npx supabase functions deploy study-api
    ```
 
-   也可在 Supabase Dashboard 的 Edge Functions 页面按同样内容创建并部署 `study-api`。`supabase/config.toml` 已将该函数设置为验证匿名访问令牌。
+   也可在 Supabase Dashboard 的 Edge Functions 页面按同样内容创建并部署 `study-api`。公开问卷不要求参与者登录；浏览器通过 `apikey` 请求头发送公开 anon / publishable key，函数自行校验提交内容。
 
 4. 在 Supabase 项目 **Settings → API Keys** 找到 Project URL 和匿名（anon / publishable）key。
 

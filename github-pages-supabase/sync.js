@@ -17,7 +17,7 @@ async function requestAPI(action,payload){
   const config=window.STUDY_SUPABASE;
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
   try{
-    const response=await fetch(functionUrl(),{method:'POST',headers:{'Content-Type':'application/json','apikey':config.anonKey,'Authorization':`Bearer ${config.anonKey}`},body:JSON.stringify({action,...payload}),signal:controller.signal,cache:'no-store'});
+    const response=await fetch(functionUrl(),{method:'POST',headers:{'Content-Type':'application/json','apikey':config.anonKey},body:JSON.stringify({action,...payload}),signal:controller.signal,cache:'no-store'});
     const result=await response.json().catch(()=>({}));
     if(!response.ok){const error=new Error(result.error||`HTTP ${response.status}`);error.status=response.status;throw error;}
     return result;
